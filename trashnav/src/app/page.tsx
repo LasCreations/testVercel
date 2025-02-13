@@ -4,6 +4,8 @@ import React, { useRef, useCallback } from "react";
 import Webcam from "react-webcam";
 
 export default function Home() {
+
+  <div>Hello</div>
   const webcamRef = useRef<Webcam>(null);
 
   // Video constraints to force back camera
