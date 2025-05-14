@@ -1,4 +1,4 @@
-import { integer, varchar, pgTable, serial, text, timestamp, jsonb, boolean } from "drizzle-orm/pg-core";
+import { integer, varchar, pgTable, serial, text, timestamp, jsonb, boolean, doublePrecision } from "drizzle-orm/pg-core";
 
 // Users table
 export const Users = pgTable("users", {
@@ -12,14 +12,11 @@ export const Users = pgTable("users", {
 export const Reports = pgTable("reports", {
   id: serial("id").primaryKey(),
   userId: integer("user_id").references(() => Users.id).notNull(),
-  location: text("location").notNull(),
-  wasteType: varchar("waste_type", { length: 255 }).notNull(),
-  amount: varchar("amount", { length: 255 }).notNull(),
-  imageUrl: text("image_url"),
-  verificationResult: jsonb("verification_result"),
-  status: varchar("status", { length: 255 }).notNull().default("pending"),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  collectorId: integer("collector_id").references(() => Users.id),
+  name: text("name").notNull(),
+  area: text("address").notNull(),
+  latitude: doublePrecision("latitude").notNull(),
+  longitude: doublePrecision("longitude").notNull(),
+  garbagelevel: integer("garbagelevel"),
 });
 
 // Rewards table
@@ -61,6 +58,7 @@ export const Transactions = pgTable("transactions", {
   userId: integer("user_id").references(() => Users.id).notNull(),
   type: varchar("type", { length: 20 }).notNull(), // 'earned' or 'redeemed'
   amount: integer("amount").notNull(),
+  status: varchar("status", { length: 20 }).notNull().default("pending"),
   description: text("description").notNull(),
   date: timestamp("date").defaultNow().notNull(),
 });
