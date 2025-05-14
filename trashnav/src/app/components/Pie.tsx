@@ -56,13 +56,15 @@ export default function PieGar() {
           med = 0,
           max = 0
 
-        data.forEach((item: any) => {
-          const level = Number(item.garbagelevel)
-          if (level <= 30) min++
-          else if (level <= 70) med++
-          else max++
-        })
-
+        if (data) {
+          data.forEach((item: any) => {
+            const level = Number(item.garbagelevel)
+            if (level <= 30) min++
+            else if (level <= 70) med++
+            else max++
+          });
+        }
+        
         const formatted: GarbageLevelGroup[] = [
           {
             level: "minimum",

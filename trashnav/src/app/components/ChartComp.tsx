@@ -57,13 +57,16 @@ export default function ChartComp() {
           Liguanea: 0,
           Kintyre: 0,
         }
+        
+        if (data) {
+          data.forEach((item: any) => {
+            const area = item.area;
+            if (AREAS.includes(area)) {
+              areaCounts[area] += 1;
+            }
+          });
+        }
 
-        data.forEach((item: any) => {
-          const area = item.area
-          if (AREAS.includes(area)) {
-            areaCounts[area] += 1
-          }
-        })
 
         // Format for chart
         const formatted = AREAS.map((area) => ({
